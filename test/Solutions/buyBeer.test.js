@@ -1,24 +1,41 @@
 const expect = chai.expect;
 
 describe('canGregBuyBeer', () => {
-  describe('when greg is 18', () => {
-    it('should return "Greg is 18, he can buy beer!"', () => {
-      const originalAge = greg.age;
-      greg.age = 18
-      const result = canGregBuyBeer();
-
-      expect(result).to.equal('Greg is 18, he can buy beer!');
-      greg.age = originalAge;
-    })
+  describe('canBuyBeer function should return:', () => {
+    it('should return true if age > 17', () => {
+      expect(canBuyBeer(18)).to.equal(true);
+    });
+    it('should return false if age =< 17', () => {
+      expect(canBuyBeer(17)).to.equal(false);
+    });
   });
-  describe('when greg under 18', () => {
-    it('should return "Greg is under 18, he can not buy beer!"', () => {
+  describe('can Greg buy beer?', () => {
+    it('if > 17 yes', () => {
       const originalAge = greg.age;
-      const result = canGregBuyBeer();
+      greg.age = 18;
 
-      expect(result).to.equal(`Greg is ${greg.age}, he can not buy beer :(`);
+      expect(canGregBuyBeer()).to.equal(
+        `Greg is ${greg.age}, he can buy beer!`
+      );
       greg.age = originalAge;
-    })
-  });
+    });
+    it('if =< 17 no', () => {
+      const originalAge = greg.age;
+      greg.age = 17;
 
+      expect(canGregBuyBeer()).to.equal(
+        `Greg is ${greg.age}, he can not buy beer :(`
+      );
+      greg.age = originalAge;
+    });
+    it('if passed a string as an age', () => {
+      const originalAge = greg.age;
+      greg.age = '17';
+      console.log(canGregBuyBeer());
+      expect(canGregBuyBeer()).to.equal(
+        `Greg is ${greg.age}, he can not buy beer :(`
+      );
+      greg.age = originalAge;
+    });
+  });
 });
